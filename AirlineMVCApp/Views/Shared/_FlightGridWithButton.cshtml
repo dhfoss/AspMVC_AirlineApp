@@ -1,0 +1,28 @@
+﻿@using NonFactors.Mvc.Grid
+@model TableWithButtonViewModel
+
+@(Html
+        .Grid(Model.Flights)
+        .Build(columns =>
+        {
+            columns.Add().RenderedAs((model, row) => row + 1).Titled("#").Css("text-center");
+            columns.Add(model => $"<a class=\"btn btn-success {Model.ButtonDisabled}\" data-id=\"{model.FlightId}\" href=\"/{Model.Controller}/{Model.Action}/{model.FlightId}\">{Model.ButtonColumnHeader}</a>").Encoded(false).Titled(Model.ButtonColumnHeader);
+            columns.Add(model => model.FlightNumber).Titled("Flight Number");
+            columns.Add(model => model.DepartureCity).Titled("Departure City");
+            columns.Add(model => model.ArrivalCity).Titled("Arrival City");
+            columns.Add(model => model.NumberOfSeats).Titled("Available Seats").RenderedAs(model => model.NumberOfSeats - model.BookedPassengers.Count);
+            columns.Add(model => model.TravelDate).Titled("Travel Date").Formatted("{0:d}");
+        })
+            .Using(GridFilterMode.Header)
+            .Empty("No data found")
+            .Filterable(GridFilterCase.Lower)
+            .Sortable()
+            .Pageable(pager => {
+            pager.PageSizes = new Dictionary<Int32, String> { { 0, "All" }, { 5, "5" }, { 10, "10" } };
+            pager.ShowPageSizes = true;
+            pager.PagesToDisplay = 3;
+            pager.CurrentPage = 1;
+            pager.RowsPerPage = 3;
+
+        })
+    )

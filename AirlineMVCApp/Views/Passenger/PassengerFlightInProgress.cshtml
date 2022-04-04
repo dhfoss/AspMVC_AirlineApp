@@ -1,0 +1,20 @@
+﻿@model PassengerInFlightViewModel
+
+<div class="container">
+    <h2>You are currently on board Flight @Model.Flight.FlightNumber from @Model.Flight.DepartureCity to @Model.Flight.ArrivalCity</h2>
+
+    <form method="post" role="form">
+        <h4>Would you like to request service?</h4>
+
+        <div class="form-control request-service">
+            <label>Request Service?</label>
+            <input type="checkbox" asp-for="@Model.PassengerInfo.IsRequestingService" />
+        </div>
+
+        @Html.AntiForgeryToken()
+        <input type="submit" class="btn btn-primary" asp-controller="Passenger" asp-action="UpdatePassengerService" value="Save Changes" />
+
+    </form>
+</div>
+
+

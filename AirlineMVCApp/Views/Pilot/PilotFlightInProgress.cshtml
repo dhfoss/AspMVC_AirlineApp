@@ -1,0 +1,11 @@
+﻿@model Flight
+
+<div class="container">
+    <h2>Flight @Model.FlightNumber from @Model.DepartureCity to @Model.ArrivalCity is in progress</h2>
+
+    <p>Next task:</p>
+
+    <a class="btn btn-primary progress-flight-button" asp-action="ProgressFlight" asp-route-id="@Model.FlightId">@Model.NextFlightTask.TaskName</a>
+
+    <div class="d-none task-complete-message">@Model.NextFlightTask.TaskCompleteMessage</div>
+</div>

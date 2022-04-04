@@ -1,0 +1,19 @@
+﻿@model TableWithButtonViewModel
+
+
+<div class="container">
+    <h2>View Passenger Manifest</h2>
+    <partial name="_FlightGridWithButton" model="Model" />
+</div>
+
+<script>
+    $('.disabled.boardBtn').click(function (e) {
+        e.preventDefault();
+        alert("You've already boarded a flight!");
+    });
+
+    $('.disabled.pilotBtn').click(function (e) {
+        e.preventDefault();
+        alert("You're already piloting a flight!");
+    });
+</script>

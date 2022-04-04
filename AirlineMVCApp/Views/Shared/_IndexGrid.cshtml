@@ -1,0 +1,22 @@
+﻿@model List<Flight>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.FlightNumber).Titled("Flight Number");
+        columns.Add(model => model.DepartureCity).Titled("Departure City");
+        columns.Add(model => model.ArrivalCity).Titled("Arrival City");
+
+        columns.Add(model => model.TravelDate).Titled("Travel Date").Formatted("{0:d}");
+    })
+    .UsingUrl(Url.Action("ViewReservations", "Passenger"))
+    .Empty("No data found")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 3;
+        pager.RowsPerPage = 2;
+    })
+    .Filterable()
+    .Sortable()
+)

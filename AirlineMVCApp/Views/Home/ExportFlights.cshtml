@@ -1,0 +1,7 @@
+﻿@using NonFactors.Mvc.Grid
+
+@model IGrid<Flight>
+
+<a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)">Export</a>
+
+@(new HtmlGrid<Flight>(Html, Model))

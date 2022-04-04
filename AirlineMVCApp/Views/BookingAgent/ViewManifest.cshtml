@@ -1,0 +1,40 @@
+﻿@model ManifestViewModel
+@*@using NonFactors.Mvc.Grid*@
+@Html.AjaxGrid(Url.Action("ViewManifest"))
+
+<div class="container">
+    <h2>Now viewing manifest for Flight @Model.Flight.FlightNumber @Model.Flight.DepartureCity to @Model.Flight.ArrivalCity</h2>
+
+    @(Html
+        .Grid(Model.Passengers)
+        .Build(columns =>
+        {
+            columns.Add().RenderedAs((model, row) => row + 1).Titled("#").Css("text-center");
+            columns.Add(model => $"<a class=\"btn btn-danger\" href=\"/BookingAgent/RemovePassengerFromManifest/{model.PassengerId}/{Model.Flight.FlightId}\" >Remove Passenger</a>").Encoded(false).Titled("Remove Passenger");
+            columns.Add(model => model.LastName).Titled("Last Name");
+            columns.Add(model => model.FirstName).Titled("First Name");
+        })
+            .Using(GridFilterMode.Header)
+            .Empty("No data found")
+            .Filterable(GridFilterCase.Lower)
+            .Sortable()
+            .Pageable(pager => {
+            pager.PageSizes = new Dictionary<Int32, String> { { 0, "All" }, { 5, "5" }, { 10, "10" } };
+            pager.ShowPageSizes = true;
+            pager.PagesToDisplay = 3;
+            pager.CurrentPage = 1;
+            pager.RowsPerPage = 3;
+
+        })
+    )
+
+
+</div>
+
+<script>
+    $('.btn-danger').click(function () {
+        $.post()
+    })
+
+</script>
+

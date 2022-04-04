@@ -1,0 +1,48 @@
+﻿@model Flight
+
+<div class="container">
+    <form asp-action="AddFlight" method="post" class="" role="form">
+        <h4>Enter in the flight info</h4>
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="FlightNumber" class="form-label"></label>
+            <input asp-for="FlightNumber" class="form-control" />
+            <span asp-validation-for="FlightNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DepartureCity" class="form-label"></label>
+            <input asp-for="DepartureCity" class="form-control" />
+            <span asp-validation-for="DepartureCity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArrivalCity" class="form-label"></label>
+            <input asp-for="ArrivalCity" class="form-control" />
+            <span asp-validation-for="ArrivalCity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TravelDate" class="form-label"></label>
+            <input asp-for="TravelDate" class="form-control" />
+            <span asp-validation-for="TravelDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NumberOfSeats" class="form-label"></label>
+            <input asp-for="NumberOfSeats" class="form-control" />
+            <span asp-validation-for="NumberOfSeats" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.AntiForgeryToken()
+            <input type="submit" class="btn btn-primary" value="Add flight" />
+        </div>
+
+    </form>
+
+    <div>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="ViewAllFlights">Cancel</a>
+    </div>
+
+
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model TableWithButtonViewModel
+
+@*@model List<Flight>
+*@
+
+
+<div class="container">
+    <h2>Here are your reservations:</h2>
+    <partial name="_FlightGridWithButton" model="Model" />
+
+
+@*@(Html.Partial("_IndexGrid"))*@
+
+@*<button class="filter">filter</button>
+</div>
+*@
+<script>
+    
+    $('.filter').click(function(){
+        var SearchQuery = new Object();
+        SearchQuery.Text = "Test Data"
+
+        $.ajax({
+            url: '@Url.Action("FilterReservations","Passenger")', 
+            type: 'POST', 
+            data: SearchQuery, 
+            success: function (result) {
+                if (result == true) {
+                    console.log(result);
+                } else {
+                    console.log(result);
+                }
+            }
+
+        });
+
+    });
+
+</script>

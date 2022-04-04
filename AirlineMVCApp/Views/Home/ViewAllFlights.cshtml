@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using NonFactors.Mvc.Grid
+
+@inject SignInManager<ApplicationUser> signInManager
+
+@model IGrid<Flight>
+
+
+<div class="container">
+    <h2>Here are all flights that have not departed:</h2>
+    <a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)">Print Flights</a>
+
+    @(new HtmlGrid<Flight>(Html, Model))
+
+    <div>
+
+        @if (signInManager.IsSignedIn(User) && (User.IsInRole("BookingAgent") || User.IsInRole("Admin")))
+        {
+            <a class="btn btn-primary mt-3" asp-controller="BookingAgent" asp-action="AddFlight">Add a flight</a>
+        }
+
+        @if (signInManager.IsSignedIn(User) && (User.IsInRole("Pilot") || User.IsInRole("Admin")))
+        {
+            <a class="btn btn-primary mt-3" asp-controller="Pilot" asp-action="PilotAFlight">Pilot a flight</a>
+        }
+
+    </div>
+</div>

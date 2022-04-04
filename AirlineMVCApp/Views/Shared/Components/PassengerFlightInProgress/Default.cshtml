@@ -1,0 +1,5 @@
+﻿@model PassengerFlightInProgressViewModel
+
+    <li class="nav-item">
+        <a class="nav-link @Model.Visibility" asp-controller="@Model.Controller" asp-action="@Model.Action">@Model.DisplayText</a>
+    </li>

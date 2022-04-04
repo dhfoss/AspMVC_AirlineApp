@@ -1,0 +1,10 @@
+﻿@model Flight
+
+<a class="flight-card" asp-controller="Passenger" asp-action="BookAFlight">
+    <i class="fas fa-plane"></i>
+    <p>Flight @Model.FlightNumber</p>
+    <p>From @Model.DepartureCity</p>
+    <p>To @Model.ArrivalCity</p> 
+    <p>Departing @Model.TravelDate.ToShortDateString()</p>
+</a>
+

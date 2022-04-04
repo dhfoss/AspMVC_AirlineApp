@@ -1,0 +1,31 @@
+﻿
+
+
+
+@model List<Flight>
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            <div class="carousel-item active carousel-item-1">
+                <h1 class="text-center welcome">Welcome to Timec Airlines</h1>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Here at Timec</h5>
+                    <p>We get you where you want to go</p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <h3>These flights are leaving very soon!</h3>
+
+    <div class="container flight-cards">
+        @foreach (var flight in Model)
+        {
+            <partial name="_FlightCard" model="flight" />
+        }
+
+    </div>

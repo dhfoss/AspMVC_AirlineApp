@@ -1,0 +1,45 @@
+﻿@model ServicePassengersViewModel
+@using NonFactors.Mvc.Grid
+
+<div class="container">
+    <h2>Flight @Model.Flight.FlightNumber from @Model.Flight.DepartureCity to @Model.Flight.ArrivalCity is now in progress</h2>
+    <h4>The following passengers are aboard this flight:</h4>
+
+    @(Html
+        .Grid(Model.BoardedPassengers)
+        .Build(columns =>
+        {
+            columns.Add().RenderedAs((model, row) => row + 1).Titled("#").Css("text-center");
+            columns.Add(model => model.LastName).Titled("Last Name");
+            columns.Add(model => model.FirstName).Titled("First Name");
+            columns.Add(model => $"<button class=\"btn btn-success greet-passenger\">Greet Passenger</button>").Encoded(false).Titled("Greet Passengers");
+            columns.Add(model => model.IsRequestingService).Titled("Service Passenger").RenderedAs(model => model.IsRequestingService == true ? $"<a class=\"btn btn-success\" href=\"/FlightAttendant/ServicePassenger/{model.PassengerInfoId}\">Service Requested!</a>" : "<span>I'm doing fine!</span>" ).Encoded(false);
+        })
+            .Using(GridFilterMode.Header)
+            .Empty("No data found")
+            .Filterable(GridFilterCase.Lower)
+            .Sortable()
+            .Pageable(pager => {
+                pager.PageSizes = new Dictionary<Int32, String> { { 0, "All" }, { 5, "5" }, { 10, "10" } };
+                pager.ShowPageSizes = true;
+                pager.PagesToDisplay = 3;
+                pager.CurrentPage = 1;
+                pager.RowsPerPage = 3;
+
+            })
+    )
+    <button class="btn btn-success serve-meal">Serve meal</button>
+</div>
+
+
+<script>
+    $('.greet-passenger').click(function () {
+        $this = $(this);
+        var firstName = $this.parent().prev().text();
+        var lastName = $this.parent().prev().prev().text();
+        alert(`Hello ${firstName} ${lastName}!`)
+    });
+    $('.serve-meal').click(function () {
+        alert("Passengers have been served a meal.")
+    })
+</script>
