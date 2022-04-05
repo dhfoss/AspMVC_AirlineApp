@@ -5,7 +5,7 @@ booking agent, flight attendant, pilot, or administrator.
 
 Passengers can purchase flights, board flights, and request service once boarded.
 
-Booking agents can view flight manifests, and schedule flights.
+Booking agents can view flight manifests, schedule flights, and export lists of available flights as and Excel file.
 
 Flight attendants can service passengers who request service, and serve meals.
 
